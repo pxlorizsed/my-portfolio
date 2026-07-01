@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Modern Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Space+Mono&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f5f5f3;
+    color:#111;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+nav{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content:flex-end;
+    padding:40px 80px;
+    z-index:1000;
+    background:rgba(245,245,243,0.75);
+    backdrop-filter:blur(8px);
+}
+
+nav ul{
+    display:flex;
+    gap:70px;
+    list-style:none;
+}
+
+nav a{
+    text-decoration:none;
+    color:#444;
+    font-family:'Space Mono', monospace;
+    font-size:18px;
+    letter-spacing:3px;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#2147ff;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    padding:120px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+
+    background-image:url("Screenshot 2026-06-12 172012.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+/* Dark overlay */
+
+.hero::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.45);
+}
+
+/* Keep content above overlay */
+
+.hero > *{
+    position:relative;
+    z-index:1;
+}
+.left{
+    width:50%;
+}
+
+.small-text{
+    font-family:'Space Mono', monospace;
+    letter-spacing:4px;
+    font-size:20px;
+    color:#5b5b5b;
+    margin-bottom:25px;
+}
+
+.main-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:130px;
+    line-height:0.9;
+    font-weight:700;
+}
+
+.scroll{
+    margin-top:90px;
+    font-family:'Space Mono', monospace;
+    letter-spacing:3px;
+    color:#555;
+    font-size:20px;
+}
+
+.right{
+    width:40%;
+    display:flex;
+    justify-content:flex-end;
+}
+
+.statement{
+    font-family:'Space Mono', monospace;
+    color:#2147ff;
+    letter-spacing:4px;
+    font-size:22px;
+}
+
+/* PROJECTS */
+
+.section{
+    padding:120px 70px;
+}
+
+.section-title{
+    font-family:'Space Mono', monospace;
+    letter-spacing:5px;
+    font-size:25px;
+    margin-bottom:60px;
+}
+
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:50px;
+}
+
+.project-card{
+    transition:0.4s;
+}
+
+.project-card:hover{
+    transform:translateY(-10px);
+}
+
+.project-card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+    filter:grayscale(100%);
+    transition:0.4s;
+}
+
+.project-card img:hover{
+    filter:grayscale(0%);
+}
+
+.project-info{
+    margin-top:25px;
+}
+
+.project-info h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.project-info p{
+    font-family:'Space Mono', monospace;
+    line-height:1.8;
+    color:#555;
+}
+
+/* DOCUMENTS */
+
+.documents-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.document-card{
+    border:1px solid #ddd;
+    padding:40px;
+    background:white;
+    transition:0.3s;
+}
+
+.document-card:hover{
+    border-color:#2147ff;
+    transform:translateY(-5px);
+}
+
+.document-card h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.document-card a{
+    text-decoration:none;
+    color:#2147ff;
+    font-family:'Space Mono', monospace;
+    letter-spacing:2px;
+}
+
+/* EXPERIENCE */
+
+.experience{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+}
+
+.experience-card{
+    padding:60px;
+    background:white;
+    border:1px solid #ddd;
+}
+
+.experience-card h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:50px;
+    margin-bottom:25px;
+}
+
+.experience-card p{
+    font-family:'Space Mono', monospace;
+    line-height:2;
+    color:#555;
+}
+
+/* CONTACT */
+
+.contact{
+    text-align:center;
+    padding-bottom:100px;
+}
+
+.contact h1{
+    font-family:'Cormorant Garamond', serif;
+    font-size:90px;
+    margin-bottom:30px;
+}
+
+.contact p{
+    font-family:'Space Mono', monospace;
+    letter-spacing:3px;
+}
+
+@media(max-width:900px){
+
+    .hero{
+        flex-direction:column;
+        justify-content:center;
+        gap:100px;
+    }
+
+    .left,
+    .right{
+        width:100%;
+    }
+
+    .main-title{
+        font-size:90px;
+    }
+
+    .experience{
+        grid-template-columns:1fr;
+    }
+
+    nav{
+        justify-content:center;
+        padding:30px;
+    }
+
+    nav ul{
+        gap:30px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+    <ul>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#documents">DOCUMENTS</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="left">
+
+        <div class="small-text">
+            ASPIRING TECHNOLOGIST
+        </div>
+
+        <h1 class="main-title">
+            EVWIN MATHEW
+        </h1>
+
+        <div class="scroll">
+            ↓ SCROLL TO EXPLORE
+        </div>
+
+    </div>
+
+   
+
+</section>
+
+<!-- PROJECTS -->
+
+<section class="section" id="projects">
+
+    <h1 class="section-title">
+        PERSONAL PROJECTS
+    </h1>
+
+    <div class="projects-grid">
+
+        <!-- PROJECT 1 -->
+
+        <div class="project-card">
+
+            <img src="genai.png">
+
+            <div class="project-info">
+
+                <h2>Career Buddy</h2>
+
+                <p>
+                    Developed an chatbot using AI and Machine Learning .
+                    Integrating concepts such as Linear regression and Word embedding to generate suitable jobs based on user specific job needs and preferrences.
+                    GPT-4o models were also used to generate job recommendations and provide career advice to users.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- PROJECT 2 -->
+
+        <div class="project-card">
+
+            <img src="Screenshot 2026-06-12 111951.png">
+
+            <div class="project-info">
+
+                <h2>Website Portfolio</h2>
+
+                <p>
+                    Created a responsive website portfolio to showcase my personal projects and skills.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- PROJECT 3 -->
+
+        <div class="project-card">
+
+            <img src="Screenshot 2026-06-12 110908.png">
+
+            <div class="project-info">
+
+                <h2>GlassBridge</h2>
+
+                <p>
+                    Recreated the iconic glass bridge game from squid game using Ursin Engine and Python, incorporating physics-based mechanics and realistic glass shattering effects for an immersive gaming experience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DOCUMENTS -->
+
+<section class="section" id="documents">
+
+    <h1 class="section-title">
+        DOCUMENTS & CERTIFICATES
+    </h1>
+
+    <div class="documents-grid">
+
+        <div class="document-card">
+            <h3>Nasa Space Apps</h3>
+            <a href="Screenshot 2026-06-12 114455.png" target="_blank">
+                OPEN IMAGE
+            </a>
+        </div>
+
+        <div class="document-card">
+            <h3>NYTC 2025</h3>
+            <a href="NYTC 2025 Evwin.pdf" target="_blank">
+                OPEN PDF
+            </a>
+        </div>
+
+        <div class="document-card">
+            <h3>GenAI</h3>
+            <a href="Evwin Mathew.pdf" target="_blank">
+                OPEN PDF
+            </a>
+        </div>
+
+        <div class="document-card">
+            <h3>Python intermediate</h3>
+            <a href="Evwin Mathew 2.pdf" target="_blank">
+                OPEN PDF
+            </a>
+        </div>
+
+        <div class="document-card">
+            <h3>WebDev</h3>
+            <a href="Evwin Mathew 3.pdf" target="_blank">
+                OPEN PDF
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- EXPERIENCE -->
+
+<section class="section">
+
+    <h1 class="section-title">
+        Competitions
+    </h1>
+
+    <div class="experience">
+
+        <div class="experience-card">
+
+            <h2>National</h2>
+
+            <p>
+                Clinched 2nd place in the National Youth Tech Championships.Using python and Opencv,me and my team developed a computer vision system to automate a drone to navigate through various obstcale courses,demonstarting our skills in compuer vision and drone automation
+            </p>
+
+        </div>
+        <div class="experience-card">
+
+            <h2>Global</h2>
+
+            <p>
+                Global finalist in the NASA Space Apps challenge.Building a 3d web application using three.js to visualise the impacts of asteroids impact on earth.
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+    <h1>CONTACT</h1>
+
+    <p>
+        bernard_savary_malayapa_evwin@students.edu.sg
+    </p>
+
+</section>
+
+</body>
+</html>
